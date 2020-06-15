@@ -109,6 +109,8 @@ var exponent = function(base, exp) {
     return 1;
   } else if (exp < 0) {
     return Number.parseFloat(((1 / base) * exponent(base, exp + 1)).toPrecision(5));
+  } else if (exp > 0 && isEven(exp)) {
+    return exponent(base, exp / 2) ** 2;
   } else {
     return base * exponent(base, exp - 1);
   }
@@ -119,6 +121,13 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n === 1) {
+    return true;
+  } else if (!Number.isInteger(n) || n === 0) {
+    return false;
+  } else {
+    return powerOfTwo(n / 2);
+  }
 };
 
 // 9. Write a function that reverses a string.
