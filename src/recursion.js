@@ -211,6 +211,45 @@ var modulo = function(x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
+  var xIsNeg, yIsNeg;
+
+  if (x === 0 || y === 0) {
+    return 0;
+  }
+
+  if (x < 0) {
+    x = x - x - x;
+    xIsNeg = true;
+  }
+
+  if (y < 0) {
+    y = y - y - y;
+    yIsNeg = true;
+  }
+
+  if ((xIsNeg && yIsNeg) || !xIsNeg && !yIsNeg) {
+    if (x <= 1) {
+      return y;
+    } else {
+      return y + multiply(x - 1, y);
+    }
+  } else if (xIsNeg) {
+    if (x <= 1) {
+      return y - y - y;
+    } else {
+      var negArg = (x - 1) - (x - 1) - (x - 1);
+      return (y - y - y) + multiply(negArg, y);
+    }
+  } else if (yIsNeg) {
+    if (x <= 1) {
+      return y - y - y;
+    } else {
+      var negArg = y - y - y;
+      return negArg + multiply(x - 1, negArg);
+    }
+  }
+
+
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
