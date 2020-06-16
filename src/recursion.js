@@ -255,6 +255,36 @@ var multiply = function(x, y) {
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
 var divide = function(x, y) {
+  var xIsNeg, yIsNeg;
+
+  if (x < 0) {
+    x = x - x - x;
+    xIsNeg = true;
+  }
+
+  if (y < 0) {
+    y = y - y - y;
+    yIsNeg = true;
+  }
+
+  if (y > x) {
+    return 0;
+  } else if (x >= 0 && x < y) {
+    return 0;
+  } else if (y === 0) {
+    return NaN;
+  } else {
+    if ((xIsNeg && yIsNeg) || (!xIsNeg && !yIsNeg)) {
+      return 1 + divide(x - y, y);
+    } else if (xIsNeg) {
+      return -1 + divide(((x - y) - (x - y) - (x - y)), y);
+    } else if (yIsNeg) {
+      return -1 + divide(x - y, y - y - y);
+    }
+
+  }
+
+
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
