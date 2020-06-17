@@ -504,6 +504,27 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
+  var arr = [];
+
+  if (n <= 0) {
+    return null;
+  } else if (n === 1) {
+    arr.push(0);
+    arr.push(1);
+    return arr;
+  } else if (n === 2) {
+    arr.push(0);
+    arr.push(1);
+    arr.push(1);
+    return arr;
+  } else {
+    var twoBack = fibonacci(n - 2);
+    var oneBack = fibonacci(n - 1);
+    var nVal = twoBack[twoBack.length - 1] + oneBack[oneBack.length - 1];
+    arr.push(nVal);
+    return fibonacci(n - 1).concat(arr)
+  }
+
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
