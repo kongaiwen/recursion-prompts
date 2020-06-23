@@ -919,4 +919,30 @@ var mergeSort = function(array) {
 // console.log(obj2); // {a:1,b:{bb:{bbb:2}},c:3}
 // obj1 === obj2 // false
 var clone = function(input) {
+  if (Array.isArray(input)) {
+    // return array
+    var arr = [];
+    for (var i = 0; i < input.length; i++) {
+      if (typeof input[i] !== 'object' && !Array.isArray(input[i])) {
+        arr.push(input[i]);
+      } else {
+        var deepElement = clone(input[i]);
+        arr.push(deepElement);
+      }
+    }
+    return arr;
+  }
+
+  // return object
+  var obj = {};
+  for (var key in input) {
+    if (typeof input[key] !== 'object' && !Array.isArray(input[key])) {
+      obj[key] = input[key];
+    } else {
+      var deepValue = clone(input[key]);
+      obj[key] = deepValue;
+    }
+  }
+
+  return obj;
 };
