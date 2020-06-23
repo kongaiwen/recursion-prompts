@@ -765,6 +765,39 @@ var alternateSign = function(array) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  var words = str.split(' ');
+  var sentence = '';
+  var numbers = {
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine'
+  }
+  if (words.length === 1) {
+    if (isNaN(parseInt(words[0])) === false) {
+      return sentence += numbers[words[0]];
+    } else {
+      return sentence += words[0];
+    }
+  } else {
+    if (isNaN(parseInt(words[0])) === false) {
+      sentence += numbers[words[0]] + ' ';
+      words.shift();
+      str = words.join(' ');
+      return sentence + numToText(str);
+    } else {
+      sentence += words[0] + ' ';
+      words.shift();
+      str = words.join(' ');
+      return sentence + numToText(str);
+    }
+  }
 };
 
 
